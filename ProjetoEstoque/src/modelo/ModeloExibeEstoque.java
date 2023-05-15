@@ -9,19 +9,10 @@ package modelo;
  * @author Gustavo
  */
 public class ModeloExibeEstoque {
-    String codigo;
     String nome;
     String quantidade;
-    String custo;
-    String preçoVenda;
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
+    String preço_custo;
+    String preço_venda;
 
     public String getNome() {
         return nome;
@@ -39,21 +30,22 @@ public class ModeloExibeEstoque {
         this.quantidade = quantidade;
     }
 
-    public String getCusto() {
-        return custo;
+    public String getPreço_custo() {
+        return preço_custo;
     }
 
-    public void setCusto(String custo) {
-        this.custo = custo;
+    public void setPreço_custo(String preço_custo) {
+        this.preço_custo = preço_custo;
     }
 
-    public String getPreçoVenda() {
-        return preçoVenda;
+    public String getPreço_venda() {
+        return preço_venda;
     }
 
-    public void setPreçoVenda(String preçoVenda) {
-        this.preçoVenda = preçoVenda;
+    public void setPreço_venda(String preço_venda) {
+        this.preço_venda = preço_venda;
     }
-    
+
+   
     
 }

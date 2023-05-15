@@ -4,8 +4,10 @@
  */
 package projetoestoque;
 
-import java.util.Random;
-import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import controller.CadastroUsuarioController;
+
 
 /**
  *
@@ -13,11 +15,15 @@ import javax.swing.JOptionPane;
  */
 public class TelaCadastroUsuario extends javax.swing.JFrame {
 
+    private final CadastroUsuarioController controller;
+
     /**
      * Creates new form TelaCadastroUsuario
      */
     public TelaCadastroUsuario() {
         initComponents();
+        
+        controller = new CadastroUsuarioController(this);
     }
 
     /**
@@ -31,9 +37,10 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        login = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        Login = new javax.swing.JTextField();
         cadastrar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        Senha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -41,13 +48,11 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
 
         jLabel2.setText("Digite seu Cpf (ele será seu login):");
 
-        login.addActionListener(new java.awt.event.ActionListener() {
+        Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginActionPerformed(evt);
+                LoginActionPerformed(evt);
             }
         });
-
-        jLabel3.setText("A senha será gerada automticamente");
 
         cadastrar.setText("Cadastrar");
         cadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -55,6 +60,8 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
                 cadastrarActionPerformed(evt);
             }
         });
+
+        jLabel4.setText("Senha:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,12 +74,13 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jLabel2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Senha)
+                            .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(47, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -87,30 +95,26 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addComponent(jLabel3)
-                .addGap(65, 65, 65)
+                    .addComponent(Login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(63, 63, 63)
                 .addComponent(cadastrar)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
+    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_loginActionPerformed
+    }//GEN-LAST:event_LoginActionPerformed
 
     private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
-     if ((login.getText().equals("")))
-     {
-         JOptionPane.showMessageDialog(null, "Não é permitido espaço em branco.");
-     }
-     else{
-         TelaLogin TL = new TelaLogin();
-         TL.setVisible(true);
-     }
+    controller.salvaUsuario();
     }//GEN-LAST:event_cadastrarActionPerformed
 
     /**
@@ -149,10 +153,29 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Login;
+    private javax.swing.JPasswordField Senha;
     private javax.swing.JButton cadastrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField login;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
+
+    public JTextField getLogin() {
+        return Login;
+    }
+
+    public void setLogin(JTextField Login) {
+        this.Login = Login;
+    }
+
+    public JPasswordField getSenha() {
+        return Senha;
+    }
+
+    public void setSenha(JPasswordField Senha) {
+        this.Senha = Senha;
+    }
+
+
 }
